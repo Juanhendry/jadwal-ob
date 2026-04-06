@@ -24,7 +24,12 @@ export default function UsersClient({ profile, initialUsers }) {
   async function loadUsers() {
     const supabase = createClient()
     const { data } = await supabase.from('profiles').select('*').order('created_at')
-    setUsers(data || [])
+    
+    const finalData = profile?.role === 'hr' 
+      ? (data || []).filter(u => u.role !== 'admin')
+      : (data || [])
+      
+    setUsers(finalData)
   }
 
   function openAdd() {

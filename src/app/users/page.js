@@ -26,10 +26,14 @@ export default async function UsersPage() {
     .select('*')
     .order('created_at')
 
+  const finalUsers = profile.role === 'hr' 
+    ? (users || []).filter(u => u.role !== 'admin')
+    : (users || [])
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar user={user} profile={profile} />
-      <UsersClient profile={profile} initialUsers={users || []} />
+      <UsersClient profile={profile} initialUsers={finalUsers} />
     </div>
   )
 }
