@@ -96,7 +96,7 @@ export function shiftLabel(shift) {
  * Jam shift
  */
 export function jamShift(shift) {
-  if (shift === 'pagi') return '06:00 – 14:00'
-  if (shift === 'malam') return '14:00 – 22:00'
+  if (shift === 'pagi') return '06:00 – 18:00'
+  if (shift === 'malam') return '18:00 – 06:00'
   return '–'
 }

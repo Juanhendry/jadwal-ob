@@ -4,6 +4,7 @@
 import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase'
 import { formatTanggalID, shiftLabel, jamShift } from '@/lib/jadwal-utils'
+import ShiftIcon from './ShiftIcon'
 
 export default function DelegasiModal({ request, onClose, onSuccess }) {
   const [obList, setObList] = useState([])
@@ -172,7 +173,8 @@ export default function DelegasiModal({ request, onClose, onSuccess }) {
                           )}
                         </div>
                         <div className="flex items-center gap-2">
-                          <span className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${badge.color}`}>
+                          <span className={`flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full border ${badge.color}`}>
+                            <ShiftIcon shift={j?.shift || 'libur'} />
                             {badge.label}
                           </span>
                           {isSelected && (

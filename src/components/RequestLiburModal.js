@@ -6,6 +6,7 @@ import { format } from 'date-fns'
 import { id } from 'date-fns/locale'
 import { createClient } from '@/lib/supabase'
 import { jamShift, shiftLabel } from '@/lib/jadwal-utils'
+import ShiftIcon from './ShiftIcon'
 
 export default function RequestLiburModal({ jadwal, onClose, onSuccess }) {
   const [alasan, setAlasan] = useState('')
@@ -76,7 +77,8 @@ export default function RequestLiburModal({ jadwal, onClose, onSuccess }) {
               {format(new Date(jadwal.tanggal), 'EEEE, dd MMMM yyyy', { locale: id })}
             </p>
             <div className="flex items-center gap-2 mt-2">
-              <span className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${badge.color}`}>
+              <span className={`flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full border ${badge.color}`}>
+                <ShiftIcon shift={jadwal.shift} />
                 {badge.label}
               </span>
               <span className="text-xs text-gray-500">{jamShift(jadwal.shift)}</span>

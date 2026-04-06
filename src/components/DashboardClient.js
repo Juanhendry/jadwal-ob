@@ -5,6 +5,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { formatTanggalID, shiftLabel, jamShift } from '@/lib/jadwal-utils'
 import DelegasiModal from './DelegasiModal'
+import ShiftIcon from './ShiftIcon'
 
 export default function DashboardClient({ profile, pendingRequests, jadwalHariIni, today }) {
   const [selectedRequest, setSelectedRequest] = useState(null)
@@ -45,7 +46,8 @@ export default function DashboardClient({ profile, pendingRequests, jadwalHariIn
                     <p className="font-semibold text-gray-900">{j.ob?.nama}</p>
                     <p className="text-xs text-gray-400 mt-0.5">{jamShift(j.shift)}</p>
                   </div>
-                  <span className={`text-xs font-semibold px-3 py-1.5 rounded-full border ${badge.color}`}>
+                  <span className={`flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full border ${badge.color}`}>
+                    <ShiftIcon shift={j.shift} />
                     {badge.label}
                   </span>
                 </div>
