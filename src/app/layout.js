@@ -1,5 +1,6 @@
 // src/app/layout.js
 import { Geist } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 const geist = Geist({ subsets: ['latin'] })
@@ -14,6 +15,7 @@ export default function RootLayout({ children }) {
     <html lang="id">
       <body className={geist.className}>
         {children}
+        <Analytics />
       </body>
     </html>
   )
