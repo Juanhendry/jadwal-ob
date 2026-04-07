@@ -3,6 +3,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import { createClient } from '@/lib/supabase'
 
 export default function LoginPage() {
@@ -30,24 +31,46 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center px-4">
-      <div className="w-full max-w-sm">
+    <div className="min-h-screen bg-[#f8fafc] flex flex-col items-center justify-center px-4 py-12">
+      {/* Decorative Background Elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] rounded-full bg-blue-50/50 blur-3xl"></div>
+        <div className="absolute top-[20%] -right-[10%] w-[30%] h-[30%] rounded-full bg-indigo-50/50 blur-3xl"></div>
+      </div>
+
+      <div className="w-full max-w-sm relative z-10">
         {/* Logo / Header */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-2xl mb-4 shadow-lg">
-            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
+        <div className="text-center mb-10">
+          <div className="flex items-center justify-center gap-6 mb-8">
+            <div className="relative w-32 h-12">
+              <Image 
+                src="/images/logo-bank-saqu.png" 
+                alt="Bank Saqu" 
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+            <div className="h-8 w-px bg-gray-200"></div>
+            <div className="relative w-32 h-10">
+              <Image 
+                src="/images/logo-agent-co.png" 
+                alt="Agent & Co" 
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
           </div>
-          <h1 className="text-2xl font-bold text-gray-900">Jadwal</h1>
-          <p className="text-gray-500 text-sm mt-1"></p>
+          <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">Jadwal Admin</h1>
+          <p className="text-gray-500 text-sm mt-2">Selamat datang kembali! Silakan masuk</p>
         </div>
 
         {/* Form */}
-        <div className="bg-white rounded-2xl shadow-xl p-8">
-          <form onSubmit={handleLogin} className="space-y-5">
+        <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 p-8">
+          <form onSubmit={handleLogin} className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">
+              <label className="block text-sm font-semibold text-gray-700 mb-1.5 ml-1">
                 Email
               </label>
               <input
@@ -55,27 +78,32 @@ export default function LoginPage() {
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 required
-                placeholder="Email Terdaftar"
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder-gray-400 transition"
+                placeholder="email@perusahaan.com"
+                className="w-full px-5 py-3.5 rounded-2xl border border-gray-200 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 text-gray-900 shadow-sm transition-all duration-200"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                Password
-              </label>
+              <div className="flex justify-between items-center mb-1.5 ml-1">
+                <label className="block text-sm font-semibold text-gray-700">
+                  Password
+                </label>
+              </div>
               <input
                 type="password"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 required
                 placeholder="••••••••"
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder-gray-400 transition"
+                className="w-full px-5 py-3.5 rounded-2xl border border-gray-200 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 text-gray-900 shadow-sm transition-all duration-200"
               />
             </div>
 
             {error && (
-              <div className="bg-red-50 text-red-600 text-sm px-4 py-3 rounded-xl border border-red-100">
+              <div className="bg-red-50 text-red-600 text-sm px-4 py-4 rounded-2xl border border-red-100 flex items-center gap-2 animate-in fade-in slide-in-from-top-1 duration-200">
+                <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                </svg>
                 {error}
               </div>
             )}
@@ -83,15 +111,23 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-semibold py-3 rounded-xl transition-colors shadow-sm"
+              className="w-full bg-blue-600 hover:bg-blue-700 active:scale-[0.98] disabled:bg-blue-400 text-white font-bold py-4 rounded-2xl transition-all duration-200 shadow-lg shadow-blue-600/20 flex items-center justify-center gap-2"
             >
-              {loading ? 'Masuk...' : 'Masuk'}
+              {loading ? (
+                <>
+                  <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Memproses...
+                </>
+              ) : 'Masuk ke Dashboard'}
             </button>
           </form>
         </div>
 
-        <p className="text-center text-xs text-gray-400 mt-6">
-          Hubungi admin jika lupa password
+        <p className="text-center text-xs text-gray-500 mt-8">
+          Butuh bantuan? <span className="text-blue-600 font-semibold cursor-pointer hover:underline">Hubungi Admin IT</span>
         </p>
       </div>
     </div>
